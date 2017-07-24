@@ -9,6 +9,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "cognitive-services": "^0.1.2"
+    "request": "^2.81.0"
   }
 }
