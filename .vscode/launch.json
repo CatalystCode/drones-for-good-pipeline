@@ -10,9 +10,7 @@
             "name": "Launch CV Test",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/test/cv.js",
-            "env": {
-                "COMPUTER_VISION_KEY": "7ff584d09fed4acdb4b7730c8274b391"
-            }
+            "envFile": "${workspaceRoot}/private.env" // look at sample.env file for reference
         }
     ]
 }
