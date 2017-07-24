@@ -7,6 +7,9 @@
     },
     "storageAccountName": {
         "value": "drones4goodstore"
+    },
+    "cognitiveServicesName": {
+        "value": "drones4good-cv"
     }
   }
 }

@@ -33,6 +33,23 @@
         "description": "The instance size of the hosting plan (small, medium, or large)."
       }
     },
+    "cognitiveServicesName": {
+      "type": "string",
+      "metadata": {
+        "description": "Cognitive Services Name"
+      }
+    },
+    "cognitiveServicesType": {
+      "type": "string",
+      "defaultValue": "S1",
+      "allowedValues": [
+        "F0",
+        "S1"
+      ],
+      "metadata": {
+        "description": "Cognitive Services Type"
+      }
+    },
     "storageAccountName": {
       "type": "string",
       "metadata": {
@@ -73,6 +90,19 @@
     "storageAccountName": "[parameters('storageAccountName')]"
   },
   "resources": [
+    {
+      "type": "Microsoft.CognitiveServices/accounts",
+      "sku": {
+        "name": "[parameters('cognitiveServicesType')]"
+      },
+      "kind": "ComputerVision",
+      "name": "[parameters('cognitiveServicesName')]",
+      "apiVersion": "2016-02-01-preview",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {},
+      "dependsOn": []
+    },
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
@@ -120,12 +150,16 @@
           }, {
             "name": "AzureWebJobsDashboard",
             "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]"
+          }, {
+            "name": "COMPUTER_VISION_KEY",
+            "value": "[listkeys(resourceId('Microsoft.CognitiveServices/accounts', parameters('cognitiveServicesName')), '2016-02-01-preview').key1]"
           }]
         }
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
+        "[resourceId('Microsoft.CognitiveServices/accounts', parameters('cognitiveServicesName'))]"
       ],
       "resources": [
         {
