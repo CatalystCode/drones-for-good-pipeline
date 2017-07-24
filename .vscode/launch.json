@@ -7,9 +7,12 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch CV Test",
             "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}/test/api.js"
+            "program": "${workspaceRoot}/test/cv.js",
+            "env": {
+                "COMPUTER_VISION_KEY": "7ff584d09fed4acdb4b7730c8274b391"
+            }
         }
     ]
 }
