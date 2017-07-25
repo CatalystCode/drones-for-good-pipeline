@@ -7,8 +7,7 @@ var ca = require('../CheckAlertFunction');
 let imageProcessingJob = {
      url: 'https://motherandbaby.blob.core.windows.net/web/1/images/ax079653_c1_w555.jpg',
      timestamp: 1500974747729,
-     frame: 1,
-     results: {}  
+     frame: 1
 };
 
 let context = {

@@ -31,6 +31,9 @@ module.exports = function (context, imageProcessingJob) {
     request(options)
     .then(function(body) {
         context.log("CV response: " + JSON.stringify(body));
+        if(!imageProcessingJob.results){
+            imageProcessingJob.results = {};
+        }
         imageProcessingJob.results.cv = body;
         context.bindings.processedJob = imageProcessingJob;
         context.done();
