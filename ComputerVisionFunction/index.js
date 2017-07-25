@@ -2,7 +2,7 @@
 var request  = require('request');
 
 module.exports = function (context, imageProcessingJob) {
-    context.log("processing job");
+    context.log("processing job: " + imageProcessingJob);
 
     // Now the format is: imageProcessingJob is a string: url;timestamp;frame
     var tokens = imageProcessingJob.split(';');
