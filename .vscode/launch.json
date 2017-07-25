@@ -7,10 +7,19 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch CV Test",
+            "name": "CV Test",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/test/cv.js",
             "envFile": "${workspaceRoot}/private.env" // look at sample.env file for reference
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Integration Test",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/test/integration.js",
+            "envFile": "${workspaceRoot}/private.env" // look at sample.env file for reference
         }
+        
     ]
 }

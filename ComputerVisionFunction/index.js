@@ -1,6 +1,8 @@
 
 var request  = require('request');
 
+//IMPORTANT: Queue messages should be encoded to base 64 first before added to the queue
+
 module.exports = function (context, imageProcessingJob) {
     context.log("Processing Job for image: " + imageProcessingJob.url);
     
@@ -24,41 +26,14 @@ module.exports = function (context, imageProcessingJob) {
         body: body
     };
 
-    var findAlertingKeywords = function(tags){
-        var alertingKeywords = {
-            object: [],
-            scene: []
-        };
-        
-         objectKeywords.forEach( function(object, objectIndex){
-             if(tags.indexOf(object) != -1){
-                 alertingKeywords.object.push(object);
-                };
-            });
-            
-        sceneKeywords.forEach( function(scene, sceneIndex){
-                if(tags.indexOf(scene) != -1){
-                    alertingKeywords.scene.push(scene);
-                };
-            });
-       return alertingKeywords;         
-    }
-
     request.post(cvUrl, options, function(error, response, body) {
             if(error) {
                 context.error("Error:" + error);
             }
             else {
-                var alertingKeywords = findAlertingKeywords(body.description.tags);
                 context.log("CV response: " + JSON.stringify(body));
-                
-                if(alertingKeywords.object.length > 0 && alertingKeywords.scene.length > 0 )
-                    context.log("ALERT!");
-                    context.bindings.alert = { 
-                        processingJob: imageProcessingJob,
-                        processingResult: body,
-                        alertingKeywords: alertingKeywords
-                    };
+                imageProcessingJob.results.cv = body;
+                context.bindings.processedJob = imageProcessingJob;
             }
             context.done();
         }
