@@ -2,18 +2,13 @@
 var request  = require('request');
 
 module.exports = function (context, imageProcessingJob) {
-    context.log("processing job: " + imageProcessingJob);
-
-    // Now the format is: imageProcessingJob is a string: url;timestamp;frame
-    var tokens = imageProcessingJob.split(';');
-    var imageUrl = tokens[0];
+    context.log("Processing Job for image: " + imageProcessingJob.url);
     
     var objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
     var sceneKeywords =  [ "car" ];
 
     cvUrl = "https://westeurope.api.cognitive.microsoft.com/vision/v1.0/analyze";
-    //body = { "url": imageProcessingJob.url };
-    body = { "url": imageUrl };
+    body = { "url": imageProcessingJob.url };
 
     var options = {
         headers: {
@@ -60,7 +55,7 @@ module.exports = function (context, imageProcessingJob) {
                 if(alertingKeywords.object.length > 0 && alertingKeywords.scene.length > 0 )
                     context.log("ALERT!");
                     context.bindings.alert = { 
-                       // processingJob: imageProcessingJob,
+                        processingJob: imageProcessingJob,
                         processingResult: body,
                         alertingKeywords: alertingKeywords
                     };
