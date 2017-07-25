@@ -37,8 +37,8 @@ module.exports = function (context, imageProcessingJob) {
     })
     .catch(function(error){
         context.error("Error:" + error);
+         context.done();
     });
-    context.done();
 };
 
 

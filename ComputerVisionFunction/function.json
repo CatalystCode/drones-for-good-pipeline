@@ -10,7 +10,7 @@
     {
       "type": "queue",
       "name": "processedJob",
-      "queueName": "completed-image-processing-jobs",
+      "queueName": "processed-jobs",
       "connection": "AzureWebJobsStorage",
       "direction": "out"
     }

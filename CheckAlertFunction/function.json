@@ -4,7 +4,7 @@
       "name": "completedImageProcessingJob",
       "type": "queueTrigger",
       "direction": "in",
-      "queueName": "completed-image-processing-jobs",
+      "queueName": "processed-jobs",
       "connection": "AzureWebJobsStorage"
     },
     {

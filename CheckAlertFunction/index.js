@@ -1,8 +1,8 @@
 
 
 
-module.exports = function (context, completedImageProcessingJob) {
-    context.log("checking process results for: " + completedImageProcessingJob.url);
+module.exports = function (context, processedJob) {
+    context.log("checking process results for: " + processedJob.url);
     
     const objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
     const sceneKeywords =  [ "car" ];
@@ -29,7 +29,7 @@ module.exports = function (context, completedImageProcessingJob) {
         };
 
     
-    var cvResult = completedImageProcessingJob.results.cv;
+    var cvResult = processedJob.results.cv;
 
     if(cvResult && cvResult.description && cvResult.description.tags){
         tags = cvResult.description.tags;
@@ -37,12 +37,12 @@ module.exports = function (context, completedImageProcessingJob) {
 
         // we should alert
         if (alertingKeywords.object.length > 0 && alertingKeywords.scene.length > 0){
-            let caption =  cvResult.description.captions && cvResult.description.captions.length > 0 ? cvResult.description.captions[0] : ""; 
+            let caption =  cvResult.description.captions && cvResult.description.captions.length > 0 ? cvResult.description.captions[0].text : ""; 
             
-            let time = new Date(completedImageProcessingJob.timestamp);
+            let time = new Date(processedJob.timestamp);
             
             let alert = {
-	            images: [completedImageProcessingJob.url], //TODO: add logic to look at previous images and add them
+	            images: [processedJob.url], //TODO: add logic to look at previous images and add them
                 time: time.toDateString(),
                 description: caption,
                 data: {
