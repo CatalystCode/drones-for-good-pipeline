@@ -1,5 +1,5 @@
 
-var request  = require('request');
+var request  = require('request-promise');
 
 //IMPORTANT: Queue messages should be encoded to base 64 first before added to the queue
 
@@ -13,6 +13,8 @@ module.exports = function (context, imageProcessingJob) {
     body = { "url": imageProcessingJob.url };
 
     var options = {
+        method: 'POST',
+        uri: cvUrl,
         headers: {
             "Ocp-Apim-Subscription-Key": process.env.COMPUTER_VISION_KEY,
             "Content-Type": "application/json"
@@ -26,18 +28,17 @@ module.exports = function (context, imageProcessingJob) {
         body: body
     };
 
-    request.post(cvUrl, options, function(error, response, body) {
-            if(error) {
-                context.error("Error:" + error);
-            }
-            else {
-                context.log("CV response: " + JSON.stringify(body));
-                imageProcessingJob.results.cv = body;
-                context.bindings.processedJob = imageProcessingJob;
-            }
-            context.done();
-        }
-    );
+    request(options)
+    .then(function(body) {
+        context.log("CV response: " + JSON.stringify(body));
+        imageProcessingJob.results.cv = body;
+        context.bindings.processedJob = imageProcessingJob;
+        context.done();
+    })
+    .catch(function(error){
+        context.error("Error:" + error);
+    });
+    context.done();
 };
 
 
