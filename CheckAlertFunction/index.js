@@ -1,28 +1,8 @@
-
-var request  = require('request');
-
-module.exports = function (context, imageProcessingJob) {
-    context.log("processing job: " + JSON.stringify.imgProcessingJob);
+module.exports = function (context, processedJob) {
     
-    var objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
-    var sceneKeywords =  [ "car" ];
+    const objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
+    const sceneKeywords =  [ "car", "window" ];
 
-    cvUrl = "https://westeurope.api.cognitive.microsoft.com/vision/v1.0/analyze";
-    body = { "url": imageProcessingJob.url };
-
-    var options = {
-        headers: {
-            "Ocp-Apim-Subscription-Key": process.env.COMPUTER_VISION_KEY,
-            "Content-Type": "application/json"
-        },
-        qs: {
-        "visualFeatures": "Categories,Description,Color",
-        "details": "",
-        "language": "en",
-        },
-        json: true,
-        body: body
-    };
 
     var findAlertingKeywords = function(tags){
         var alertingKeywords = {

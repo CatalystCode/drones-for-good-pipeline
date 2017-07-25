@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "name": "processedJob",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "processed-jobs",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "queue",
+      "name": "alert",
+      "queueName": "alerts",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}
