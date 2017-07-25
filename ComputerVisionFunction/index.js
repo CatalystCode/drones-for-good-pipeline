@@ -2,7 +2,7 @@
 var request  = require('request');
 
 module.exports = function (context, imageProcessingJob) {
-    context.log("processing job: " + JSON.stringify.imgProcessingJob);
+    context.log("processing job: " + JSON.stringify(imageProcessingJob));
     
     var objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
     var sceneKeywords =  [ "car" ];
@@ -50,6 +50,7 @@ module.exports = function (context, imageProcessingJob) {
             }
             else {
                 var alertingKeywords = findAlertingKeywords(body.description.tags);
+                context.log("CV response: " + JSON.stringify(body));
                 
                 if(alertingKeywords.object.length > 0 && alertingKeywords.scene.length > 0 )
                     context.log("ALERT!");
