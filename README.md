@@ -11,9 +11,9 @@ az login
 az group create --name drones4good-demo1 --location "West Europe"
 az group deployment create ^
     --name 2017-24-07 ^
-    --resource-group drones4good-demo1 ^
+    --resource-group drones4good-rg ^
     --template-file azuredeploy.json ^
-    --parameters "{\"appName\":{\"value\":\"drones4good-demo-pipeline\"},\"storageAccountName\":{\"value\":\"drones4goodstoredemo\"},\"cognitiveServicesName\":{\"value\":\"drones4good-demo-cv\"}}"
+    --parameters "{\"appName\":{\"value\":\"drones4good\"}}"
 ```
 
 bash:
@@ -27,7 +27,7 @@ az login
 az group create --name drones4good-demo1 --location "West Europe"
 az group deployment create \
     --name 2017-24-07 \
-    --resource-group drones4good-demo1 \
+    --resource-group drones4good \
     --template-file azuredeploy.json \
-    --parameters "{\"appName\":{\"value\":\"drones4good-demo-pipeline\"},\"storageAccountName\":{\"value\":\"drones4goodstoredemo\"},\"cognitiveServicesName\":{\"value\":\"drones4good-demo-cv\"}}"
+    --parameters "{\"appName\":{\"value\":\"drones4good\"}}"
 ```

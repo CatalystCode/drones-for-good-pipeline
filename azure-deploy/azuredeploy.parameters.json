@@ -3,13 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "appName": {
-      "value": "drones4good-pipeline"
-    },
-    "storageAccountName": {
-        "value": "drones4goodstore"
-    },
-    "cognitiveServicesName": {
-        "value": "drones4good-cv"
+      "value": "drones4good"
     }
   }
 }
