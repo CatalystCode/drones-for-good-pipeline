@@ -190,7 +190,20 @@
         "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       ],
       "properties": {
-        "serverFarmId": "[variables('hostingPlanName')]"
+        "serverFarmId": "[variables('hostingPlanName')]",
+        "siteConfig": {
+          "alwaysOn": true,
+          "appSettings": [{
+            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+            "value": "6.9.1"
+          }, {
+            "name": "ACCOUNT_NAME",
+            "value": "[variables('storageAccountName')]"
+          }, {
+            "name": "ACCOUNT_KEY",
+            "value": "[listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1]"
+          }]
+        }
       },
       "resources": [
         {
