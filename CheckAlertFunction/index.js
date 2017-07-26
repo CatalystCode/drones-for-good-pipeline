@@ -1,10 +1,8 @@
 
-
-
 module.exports = function (context, processedJob) {
     context.log("checking process results for: " + processedJob.url);
     
-    const objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
+    const objectKeywords = [ "man", "woman", "baby", "girl", "boy", "dog", "cat", "pet", "animal_dog", "animal_cat", "plant", "tree"];
     const sceneKeywords =  [ "car" ];
 
     var findAlertingKeywords = function(tags){

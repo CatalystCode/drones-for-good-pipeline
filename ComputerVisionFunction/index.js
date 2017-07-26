@@ -5,9 +5,6 @@ var request  = require('request-promise');
 
 module.exports = function (context, imageProcessingJob) {
     context.log("Processing Job for image: " + imageProcessingJob.url);
-    
-    var objectKeywords = [ "baby", "girl", "boy", "dog", "cat", "pet"];
-    var sceneKeywords =  [ "car" ];
 
     cvUrl = "https://westeurope.api.cognitive.microsoft.com/vision/v1.0/analyze";
     body = { "url": imageProcessingJob.url };
@@ -29,7 +26,7 @@ module.exports = function (context, imageProcessingJob) {
     };
 
     request(options)
-    .then(function(body) {
+      .then(function(body) {
         context.log("CV response: " + JSON.stringify(body));
         if(!imageProcessingJob.results){
             imageProcessingJob.results = {};
