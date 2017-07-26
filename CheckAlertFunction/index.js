@@ -3,7 +3,7 @@ module.exports = function (context, processedJob) {
     context.log("checking process results for: " + processedJob.url);
     
     const objectKeywords = [ "man", "woman", "baby", "girl", "boy", "dog", "cat", "pet", "animal_dog", "animal_cat", "plant", "tree"];
-    const sceneKeywords =  [ "car" ];
+    const sceneKeywords =  [ "car", "car mirror" ];
 
     var findAlertingKeywords = function(tags){
             var alertingKeywords = {
