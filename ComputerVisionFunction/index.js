@@ -17,7 +17,7 @@ module.exports = function (context, imageProcessingJob) {
             "Content-Type": "application/json"
         },
         qs: {
-        "visualFeatures": "Categories,Description,Color",
+        "visualFeatures": "Categories,Description,Color,Tags,Faces",
         "details": "",
         "language": "en",
         },
